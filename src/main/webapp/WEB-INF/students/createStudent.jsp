@@ -15,15 +15,15 @@
 			<table>
 				<tr>
 					<td>First Name</td>
-					<td><input type="text" name="firstName"></td> 
+					<td><input type="text" name="firstName" required></td> 
 				</tr>
 				<tr>
 					<td>Last Name</td>
-					<td><input type="text" name="lastName"></td> 
+					<td><input type="text" name="lastName" required></td> 
 				</tr>
 				<tr>
 					<td>Age</td>
-					<td><input type="number" name="age"></td> 
+					<td><input type="number" name="age" required></td> 
 				</tr>
 				<tr>
 					<td></td>
@@ -31,5 +31,6 @@
 				</tr>
 			</table>		
 		</form:form>
+		<form action="/"><input type="submit" value="Home"></form>
 	</body>
 </html>

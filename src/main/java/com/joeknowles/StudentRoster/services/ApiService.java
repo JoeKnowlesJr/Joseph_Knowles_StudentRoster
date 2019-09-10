@@ -1,6 +1,7 @@
 package com.joeknowles.StudentRoster.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -19,4 +20,6 @@ public class ApiService {
 	public List<Student> allStudents() { return sRepo.findAll(); }
 	public void createStudent(Student s) { sRepo.save(s); }
 	public void createContact(Contact c) { cRepo.save(c); }
+	public void updateStudent(Student s) { sRepo.save(s); }
+	public Optional<Student> findStudentById(Long id) { return sRepo.findById(id); }
 }

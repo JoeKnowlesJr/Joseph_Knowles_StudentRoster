@@ -1,13 +1,19 @@
 package com.joeknowles.StudentRoster.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.joeknowles.StudentRoster.models.Contact;
+import com.joeknowles.StudentRoster.models.ContactFormObject;
 import com.joeknowles.StudentRoster.models.Student;
 import com.joeknowles.StudentRoster.services.ApiService;
 
@@ -32,7 +38,7 @@ public class StudentController {
 	}
 	
 	@GetMapping("/students/create")
-	public String createStudent(Model model, @ModelAttribute("student") Student s) {
+	public String createStudent(Model model, @Valid @ModelAttribute("student") Student s, BindingResult result) {
 		service.createStudent(s);
 		model.addAttribute("students", service.allStudents());
 		return "/students/show.jsp";
@@ -40,14 +46,30 @@ public class StudentController {
 	
 	@PostMapping("/contacts/new")
 	public String newContact(Model model) {
-		model.addAttribute("contact", new Contact());
-		model.addAttribute("students", service.allStudents());
+		List<Student> needList = new ArrayList<>();
+		for (Student s : service.allStudents()) {
+			if (s.needsContact()) {
+				needList.add(s);
+			}
+		}
+		model.addAttribute("cfo", new ContactFormObject());
+		model.addAttribute("students", needList);
 		return "/students/createContact.jsp";
 	}
 	
 	@GetMapping("/contacts/create")
-	public String createContact(Model model, @ModelAttribute("contact") Contact contact) {
-		service.createContact(contact);
+	public String createContact(Model model, @Valid @ModelAttribute("cfo") ContactFormObject cfo, BindingResult result) {
+		if (result.hasErrors()) {
+			//kick it back
+		}
+		Optional<Student> oS = service.findStudentById(cfo.getStudent_id());
+		if (oS.isPresent()) {
+			Student s = oS.get();
+			Contact c = cfo.getContact();
+			c.setStudent(s);
+			s.setContact(c);
+			service.updateStudent(s);
+		}
 		model.addAttribute("students", service.allStudents());
 		return "/students/show.jsp";
 	}

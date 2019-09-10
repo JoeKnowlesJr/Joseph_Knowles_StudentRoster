@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name="contacts")
 public class Contact {
 
-	private Long id;
+	private Long contact_id;
 	private String address;
 	private String city;
 	private String state;
@@ -28,9 +28,9 @@ public class Contact {
 	}
 	
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id", unique=true, nullable=false, updatable=false)
-	public Long getId() { return id; }
-	public void setId(Long id) { this.id = id; }
+	@Column(name="contact_id", unique=true, nullable=false, updatable=false)
+	public Long getId() { return contact_id; }
+	public void setId(Long id) { this.contact_id = id; }
 	
     @Column(name="address")
 	public String getAddress() { return address; }

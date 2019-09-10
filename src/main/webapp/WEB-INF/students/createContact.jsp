@@ -11,11 +11,11 @@
 	</head>
 	<body>
 		<h1>New Contact</h1>
-		<form:form action="/contacts/create" method="get" modelAttribute="contact">
+		<form:form action="/contacts/create" method="get" modelAttribute="cfo">
 			<table>
 				<tr>
 					<td>Student</td>
-					<td><form:select path="student">
+					<td><form:select path="student_id">
 						<c:forEach items="${students}" var="s">
 							<form:option value="${s.getId()}">${s.getName()}</form:option>
 						</c:forEach>
@@ -23,15 +23,15 @@
 				</tr>
 				<tr>
 					<td>Address</td>
-					<td><input type="text" name="address"></td> 
+					<td><input type="text" name="address" required></td> 
 				</tr>
 				<tr>
 					<td>City</td>
-					<td><input type="text" name="city"></td> 
+					<td><input type="text" name="city" required></td> 
 				</tr>
 				<tr>
 					<td>State</td>
-					<td><input type="text" name="state"></td> 
+					<td><input type="text" name="state" required></td> 
 				</tr>
 				<tr>
 					<td></td>
@@ -39,5 +39,6 @@
 				</tr>
 			</table>		
 		</form:form>
+		<form action="/"><input type="submit" value="Home"></form>
 	</body>
 </html>

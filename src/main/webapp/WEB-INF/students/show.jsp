@@ -33,5 +33,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<form action="/"><input type="submit" value="Home"></form>
 	</body>
 </html>

@@ -75,4 +75,6 @@ public class Student {
 	
 	@Transient
 	public String getName() { return String.format("%s %s", first_name, last_name); }
+	
+	public boolean needsContact() { return (contact == null); }
 }
