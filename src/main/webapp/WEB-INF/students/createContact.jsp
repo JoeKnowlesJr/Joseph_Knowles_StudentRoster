@@ -13,6 +13,9 @@
 		<h1>New Contact</h1>
 		<form:form action="/contacts/create" method="get" modelAttribute="cfo">
 			<table>
+				<c:if test="${failed == true}">
+					<tr><td>Invalid</td><td>data!</td></tr>
+				</c:if>
 				<tr>
 					<td>Student</td>
 					<td><form:select path="student_id">

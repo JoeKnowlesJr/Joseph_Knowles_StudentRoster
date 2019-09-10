@@ -6,6 +6,8 @@ public class ContactFormObject {
 	private String state;
 	private Long student_id;
 	
+	public ContactFormObject() { student_id = -1L; }
+	
 	public String getAddress() { return address; }
 	public void setAddress(String address) { this.address = address; }
 	public String getCity() { return city; }

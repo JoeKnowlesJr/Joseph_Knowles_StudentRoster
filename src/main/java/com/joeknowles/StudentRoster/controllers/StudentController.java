@@ -59,8 +59,10 @@ public class StudentController {
 	
 	@GetMapping("/contacts/create")
 	public String createContact(Model model, @Valid @ModelAttribute("cfo") ContactFormObject cfo, BindingResult result) {
-		if (result.hasErrors()) {
-			//kick it back
+		if (result.hasErrors() || cfo.getStudent_id() == -1) {
+			model.addAttribute("failed", true);
+			model.addAttribute("cfo", cfo);
+			return "/students/createContact.jsp";
 		}
 		Optional<Student> oS = service.findStudentById(cfo.getStudent_id());
 		if (oS.isPresent()) {
